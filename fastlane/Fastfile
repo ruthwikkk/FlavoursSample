@@ -1,0 +1,63 @@
+ENV["SLACK_URL"] = "https://hooks.slack.com/services/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"
+
+default_platform(:android)
+
+platform :android do
+  
+  desc "Build a debug build"
+  lane :builddebug do
+    gradle(task: "assembleDebug",
+    build_type: "Debug",
+    flavor: "nightly")
+  end
+
+  desc "Upload the APK to Slack channel"
+  private_lane :upload_to_slack do |options|
+   file_path = lane_context[SharedValues::GRADLE_APK_OUTPUT_PATH]
+   file_name = file_path.gsub(/\/.*\//,"")
+   sh "echo Uploading " + file_name + " to Slack"
+   sh "curl https://slack.com/api/files.upload -F token=\"xoxb-1420542563091-1417255670677-2aZkXxlrIQRphzUYJ63ibA87\" -F channels=\"#a-campaign\" -F title=\"" + file_name + "\" -F filename=\"" + file_name + "\" -F file=@" + file_path
+  end
+
+  lane :slackbuild do |options|
+  gradle(task: "assembleDebug")
+
+  feature = options[:feature]
+
+  slack(
+  message: "Here is a nighly build for " + feature,
+  channel: "#a-campaign",
+  success: true,
+  payload: {"Build type" => "Nightly", "Built by" => "Gradle"},
+  default_payloads: [:git_branch, :git_author]
+  )
+  
+  upload_to_slack()
+  end
+  
+  lane :slackbuildRelease do |options|
+  gradle(task: "assemble",
+  	 build_type: "Release",
+  	 flavor: "nightly",
+  	 properties: {
+    "android.injected.signing.store.file" => File.expand_path("..", Dir.pwd) + + "/" + "key.jks",
+    "android.injected.signing.store.password" => "123456",
+    "android.injected.signing.key.alias" => "keyAlias",
+    "android.injected.signing.key.password" => "123456"
+    }
+  	 )
+
+  feature = options[:feature]
+
+  slack(
+  message: "Here is a nighly build for " + feature,
+  channel: "#a-campaign",
+  success: true,
+  payload: {"Build type" => "Nightly", "Built by" => "Gradle"},
+  default_payloads: [:git_branch, :git_author]
+  )
+  
+  upload_to_slack()
+  end
+
+end
