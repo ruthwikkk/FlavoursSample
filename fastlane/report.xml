@@ -5,32 +5,32 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.000287537">
+      <testcase classname="fastlane.lanes" name="0: default_platform" time="0.00029346">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: assembleDebug" time="27.086999646">
+      <testcase classname="fastlane.lanes" name="1: assembleDebug" time="2.273459072">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="2: slack" time="4.708338162">
+      <testcase classname="fastlane.lanes" name="2: slack" time="0.835000837">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="3: Switch to android upload_to_slack lane" time="0.000625327">
+      <testcase classname="fastlane.lanes" name="3: Switch to android upload_to_slack lane" time="0.000509214">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="4: echo Uploading app-stable-debug.apk to Slack" time="0.006140261">
+      <testcase classname="fastlane.lanes" name="4: echo Uploading app-stable-debug.apk to Slack" time="0.006061303">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="5: curl https://slack.com/api/files.upload -F token=&quot;xoxb-1420542563091-1417255670677-2aZkXxlrIQRphzUYJ63ibA87&quot; -F channels=&quot;#a-campaign&quot; -F title=&quot;app-stable-debug.apk&quot; -F filename=&quot;app-stable-debug.apk&quot; -F file=@/home/ruthwik/Dev/Android/demo/FlavoursSample/app/build/outputs/apk/stable/debug/app-stable-debug.apk" time="5.531019774">
+      <testcase classname="fastlane.lanes" name="5: curl https://slack.com/api/files.upload -F token=&quot;xoxb-1555746520277-1552118657030-A8jV5MB1y3cDHCsRzM4i5vP9&quot; -F channels=&quot;#app&quot; -F title=&quot;app-stable-debug.apk&quot; -F filename=&quot;app-stable-debug.apk&quot; -F file=@/home/ruthwik/Dev/Android/demo/FlavoursSample/app/build/outputs/apk/stable/debug/app-stable-debug.apk" time="4.318520383">
         
       </testcase>
     
